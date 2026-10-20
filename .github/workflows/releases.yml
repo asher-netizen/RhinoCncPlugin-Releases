@@ -1,0 +1,36 @@
+name: Publish compiled download release
+on:
+  push:
+    branches: [main]
+    paths: [latest.json]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: compiled-download-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Create public release from already-qualified public binaries
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $metadata=Get-Content latest.json -Raw | ConvertFrom-Json
+          if($metadata.Channel -ne 'stable' -or $metadata.Version -notmatch '^\d+\.\d+(\.\d+){0,2}$'){throw 'Invalid stable feed'}
+          $version=$metadata.Version
+          $package="packages/$version/CncPlugin-$version-win-x64.zip"
+          if((Get-FileHash $package).Hash.ToLowerInvariant() -ne $metadata.Sha256){throw 'Package checksum mismatch'}
+          $tag="v$version"
+          gh release view $tag --repo asher-netizen/RhinoCncPlugin-Releases --json tagName
+          if($LASTEXITCODE -eq 0){Write-Output 'Release already exists; immutable assets retained';exit 0}
+          $notes="Created $($metadata.PublishedUtc).`n`nComplete Windows Rhino 8 plug-in package. No GitHub account is needed. Extract the ZIP, save/close Rhino, then run Install-CncPlugin.cmd. Future stable updates download automatically and load after a full Rhino restart. Settings/jobs/tools remain retained. See FRIEND-INSTALL.txt.`n`nSource revision: $($metadata.Commit).`n`nQualification: $($metadata.Qualification)"
+          $notes | Set-Content release-notes.txt
+          gh release create $tag $package "$package.sha256" --repo asher-netizen/RhinoCncPlugin-Releases --target '${{ github.sha }}' --title "CNC $version" --notes-file release-notes.txt
+          if($LASTEXITCODE -ne 0){throw 'Release publication failed'}
