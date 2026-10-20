@@ -30,7 +30,7 @@ jobs:
           $tag="v$version"
           gh release view $tag --repo asher-netizen/RhinoCncPlugin-Releases --json tagName
           if($LASTEXITCODE -eq 0){Write-Output 'Release already exists; immutable assets retained';exit 0}
-          $notes="Created $($metadata.PublishedUtc).`n`nComplete Windows Rhino 8 plug-in package. No GitHub account is needed. Extract the ZIP, save/close Rhino, then run Install-CncPlugin.cmd. Future stable updates download automatically and load after a full Rhino restart. Settings/jobs/tools remain retained. See FRIEND-INSTALL.txt.`n`nSource revision: $($metadata.Commit).`n`nQualification: $($metadata.Qualification)"
+          $notes="Created $($metadata.PublishedChicago).`n`nComplete Windows Rhino 8 plug-in package. No GitHub account is needed. Extract the ZIP, save/close Rhino, then run Install-CncPlugin.cmd. Future stable updates download automatically and load after a full Rhino restart. Settings/jobs/tools remain retained. See FRIEND-INSTALL.txt.`n`nSource revision: $($metadata.Commit).`n`nQualification: $($metadata.Qualification)"
           $notes | Set-Content release-notes.txt
           gh release create $tag $package "$package.sha256" --repo asher-netizen/RhinoCncPlugin-Releases --target '${{ github.sha }}' --title "CNC $version" --notes-file release-notes.txt
           if($LASTEXITCODE -ne 0){throw 'Release publication failed'}
