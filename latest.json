@@ -1,10 +1,10 @@
 {
-  "Version": "3.66.2",
+  "Version": "3.66.6",
   "Channel": "stable",
-  "PackageUrl": "https://raw.githubusercontent.com/asher-netizen/RhinoCncPlugin-Releases/main/packages/3.66.2/CncPlugin-3.66.2-win-x64.zip",
-  "Sha256": "33f6a193e30a349a67d3b1b8d718795e3ff82ce4e884641c438285966cac9bf8",
-  "Commit": "daae402320374781b85469a13c58827f1e64f93e",
-  "PublishedUtc": "2026-10-20T16:35:20.5574129Z",
-  "PublishedChicago": "October 20, 2026 11:35 AM America/Chicago",
+  "PackageUrl": "https://raw.githubusercontent.com/asher-netizen/RhinoCncPlugin-Releases/main/packages/3.66.6/CncPlugin-3.66.6-win-x64.zip",
+  "Sha256": "eae823371cf6a18c74e7c87d11e936718cbb81899d0a8cec5b785fd8a8b7b573",
+  "Commit": "c9d7dec536172d7a50e04a5d34a7f4609552a573",
+  "PublishedUtc": "2026-10-22T16:20:00.1840803Z",
+  "PublishedChicago": "October 22, 2026 11:20 AM America/Chicago",
   "Qualification": "Host-free software and package checks. Native Rhino panel/restart qualification remains pending; no physical machining test claimed."
 }
