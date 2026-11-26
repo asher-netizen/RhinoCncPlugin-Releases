@@ -1,0 +1,10 @@
+{
+  "Version": "3.68.15",
+  "Channel": "stable",
+  "PackageUrl": "https://raw.githubusercontent.com/asher-netizen/RhinoCncPlugin-Releases/main/packages/3.68.15/CncPlugin-3.68.15-win-x64.zip",
+  "Sha256": "4b11500148ab265eda9fb65bd5bb253b58d27b0daedda7b4961008ad085bb86f",
+  "Commit": "97ad21405c395d936557bf20f8e53cd2e3aca04a",
+  "PublishedUtc": "2026-11-26T02:29:27.1021474Z",
+  "PublishedChicago": "November 25, 2026 8:29 PM America/Chicago",
+  "Qualification": "Host-free software and package checks. Native Rhino panel/restart qualification remains pending; no physical machining test claimed."
+}
